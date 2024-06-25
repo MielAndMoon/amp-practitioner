@@ -122,3 +122,10 @@ def set_exit_time(request):
         else:
             return JsonResponse({"updated": False})
     return handler404(request, "404")
+
+
+def custom_404(request, exception):
+    context = {}
+    response = render(request, "404.html", context)
+    response.status_code = 404
+    return response
