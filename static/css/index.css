@@ -39,6 +39,11 @@ body {
         grid-row: 1/2;
         opacity: 1;
     }
+
+    form-attendance {
+        grid-column: 1/-1;
+        grid-row: 3/4;
+    }
 }
 
 modal-information {
@@ -75,4 +80,8 @@ modal-information {
 .show {
     display: block;
     animation: appear .5s;
+}
+
+.modal__description--bold {
+    font-weight: 700;
 }

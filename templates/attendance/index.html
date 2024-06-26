@@ -13,6 +13,9 @@
   <navigation-bar image-url="{% static 'img/logo.png' %}"></navigation-bar>
   <main class="main">
     <digital-clock></digital-clock>
+    <form-attendance>
+      {% csrf_token %}
+    </form-attendance>
   </main>
   <script src="{% static 'js/index.js' %}" type="module"></script>
 {% endblock %}
