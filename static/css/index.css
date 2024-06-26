@@ -10,4 +10,27 @@ body {
     margin: 0;
     background-color: rgb(55 65 81);
     font-family: "Dosis", sans-serif;
+    display: grid;
+    height: 100vh;
+    grid-template-rows: min-content auto;
+}
+
+.main {
+    display: grid;
+    padding: 2rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: min-content 1fr;
+}
+
+@media (max-width: 1230px) {
+    .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, min-content);
+    }
+
+    digital-clock {
+        grid-column: 1/-1;
+        grid-row: 2/3;
+        padding: 2rem 0;
+    }
 }
