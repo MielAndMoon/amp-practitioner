@@ -15,6 +15,7 @@ class AttendanceAdminArea(admin.AdminSite):
     site_header = "Administrador"
     site_title = "Administrador de asistencia"
     index_title = "Administrador de asistencia"
+    login_template = "admin/login.html"
 
 
 attendance_admin = AttendanceAdminArea(name="asistencia")

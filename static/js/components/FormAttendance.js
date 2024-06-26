@@ -297,6 +297,7 @@ class FormAttendance extends HTMLElement {
                     <span class="errors__icon--text">Info</span>
                     <p class="errors__messages" id="messageErrors">Not found</p>
                 </div>
+            </div>
         </form>
     </div>
 </div>

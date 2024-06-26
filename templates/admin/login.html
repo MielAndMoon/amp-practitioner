@@ -1,0 +1,88 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n static %}
+
+{% block extrastyle %}
+  {{ block.super }} <link rel="stylesheet" href="{% static 'css/admin/login.css' %}" />
+  {{ form.media }}
+  <link rel="icon" href="{% static 'img/logo.png' %}" />
+  <link rel="apple-touch-icon" href="{% static 'img/logo.png' %}" />
+{% endblock %}
+
+{% block bodyclass %}
+  {{ block.super }} login
+{% endblock %}
+
+{% block usertools %}
+
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block nav-global %}
+{% endblock %}
+
+{% block nav-sidebar %}
+{% endblock %}
+
+{% block content_title %}
+
+{% endblock %}
+
+{% block nav-breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+  {% if form.errors and not form.non_field_errors %}
+    <p class="errornote">
+      {% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktranslate %}
+    </p>
+  {% endif %}
+
+  <div id="content-main">
+    <div class="nav__logo">
+      <span class="nav__logo--text">Iniciar sesión como administrador</span>
+    </div>
+
+    {% if user.is_authenticated %}
+      <p class="errornote">
+        {% blocktranslate trimmed %}You are authenticated as {{ username }}, but are not authorized to access this page. Would you like to login to a different account?{% endblocktranslate %}
+      </p>
+    {% endif %}
+    <form action="{{ app_path }}" method="post" id="login-form">
+      {% csrf_token %}
+      <div class="form-row">{{ form.username.errors }}
+        {{ form.username.label_tag }} {{ form.username }}</div>
+      <div class="form-row">
+        {{ form.password.errors }}
+        {{ form.password.label_tag }} {{ form.password }}
+        <input type="hidden" name="next" value="{{ next }}" />
+      </div>
+      {% url 'admin_password_reset' as password_reset_url %}
+      {% if password_reset_url %}
+        <div class="password-reset-link">
+          <a href="{{ password_reset_url }}">{% translate 'Forgotten your password or username?' %}</a>
+        </div>
+      {% endif %}
+      {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+          <div class="container__errors" id="containerErrors">
+            <div class="form__errors" role="alert" id="errors">
+              <svg class="errors__icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+              </svg>
+
+              <span class="errors__icon--text">Info</span>
+              <p class="errors__messages" id="messageErrors">{{ error }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+      <div class="submit-row">
+        <input type="submit" value="{% translate 'Log in' %}" />
+        <a class="return__index" href="{% url 'index' %}">Regresar al inicio</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
