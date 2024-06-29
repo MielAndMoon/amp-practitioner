@@ -11,7 +11,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 API_KEY = os.environ.get('API_KEY')
 
-DEBUG = bool(os.environ.get('DEBUG'))
+DEBUG = false
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 
