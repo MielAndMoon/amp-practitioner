@@ -81,7 +81,6 @@ class AttendanceAdmin(admin.ModelAdmin):
 
 
 attendance_admin.register(User, MyUserAdmin)
-attendance_admin.register(Practitioner, PractitionerAdmin)
 attendance_admin.register(Student, StudentAdmin)
 attendance_admin.register(StudyCenter)
 attendance_admin.register(Career, CareerAdmin)
