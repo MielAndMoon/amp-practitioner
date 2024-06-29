@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -13,6 +14,8 @@ API_KEY = os.environ.get('API_KEY')
 DEBUG = bool(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS').split(' ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,12 +58,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
